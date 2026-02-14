@@ -1,26 +1,54 @@
 {
-  "name": "package",
+  "name": "turtle-wow-dps-simulator",
   "version": "1.0.0",
-  "description": "WarriorSim",
+  "description": "Turtle WoW DPS Simulator - Multi-Class Support",
   "main": "main.js",
   "devDependencies": {
     "browser-sync": "^3.0.3",
+    "electron": "^28.0.0",
+    "electron-builder": "^24.0.0",
     "gulp": "^5.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-cssnano": "^2.1.3",
     "gulp-minify": "^3.1.0",
-    "gulp-sass": "^4.1.0",
+    "gulp-sass": "^5.1.0",
+    "sass": "^1.77.0",
     "gulp-uglify": "^3.0.2"
   },
   "scripts": {
     "dist": "gulp sass && gulp js-build",
     "dev": "gulp",
-    "start": "gulp"
+    "start": "electron .",
+    "web": "gulp",
+    "pack": "electron-builder --dir",
+    "build": "electron-builder"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "gulp-rename": "^2.0.0",
     "gulp-strip-code": "^0.1.4"
+  },
+  "build": {
+    "appId": "com.turtlewow.dps-simulator",
+    "productName": "Turtle WoW DPS Simulator",
+    "files": [
+      "**/*",
+      "!node_modules",
+      "!scss",
+      "!test"
+    ],
+    "directories": {
+      "buildResources": "build"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
   }
 }

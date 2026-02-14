@@ -3,7 +3,7 @@
 
 <head>
   <meta name="viewport" content="width=device-width">
-  <title>TWoW Warrior DPS Sim</title>
+  <title>Turtle WoW DPS Simulator</title>
 
   <link rel="icon" type="image/x-icon" href="/WarriorSim-TurtleWoW/favicon.ico">
   <link href="dist/css/theme.default.min.css" rel="stylesheet">
@@ -16,6 +16,18 @@
   <script type="text/javascript" src="dist/js/libs/jquery.tablesorter.widgets.min.js"></script>
   <script type="text/javascript" src="dist/js/libs/Chart.min.js"></script>
 
+  <!-- Multi-class support -->
+  <script type="text/javascript" src="dist/js/data/classes.min.js"></script>
+  <script type="text/javascript" src="dist/js/classes/Character.min.js"></script>
+  <script type="text/javascript" src="dist/js/combat/ResourceManager.min.js"></script>
+  
+  <!-- Class implementations -->
+  <script type="text/javascript" src="dist/js/classes/warrior/WarriorPlayer.min.js"></script>
+  <script type="text/javascript" src="dist/js/classes/rogue/RoguePlayer.min.js"></script>
+  <script type="text/javascript" src="dist/js/classes/mage/MagePlayer.min.js"></script>
+  <script type="text/javascript" src="dist/js/classes/ClassFactory.min.js"></script>
+  
+  <!-- Original classes (Player is now alias for WarriorPlayer) -->
   <script type="text/javascript" src="dist/js/classes/player.min.js"></script>
   <script type="text/javascript" src="dist/js/classes/simulation.min.js"></script>
   <script type="text/javascript" src="dist/js/classes/spell.min.js"></script>
@@ -92,7 +104,7 @@ TO EXPLORE:
 <br/>-prot talents but who cares?
 </div>
     <div class="character">
-      <p><span id="race">Human</span> Warrior</p>
+      <p><span id="race">Human</span> <span id="playerclass">Warrior</span></p>
       <p>Level <span id="level"></span></p>
 
       <ul>
@@ -237,6 +249,14 @@ TO EXPLORE:
               <option value="Tauren">Tauren</option>
               <option value="Troll">Troll</option>
               <option value="Goblin">Goblin</option>
+            </select>
+          </li>
+          <li>
+            <label>Class</label>
+            <select dir="rtl" name="playerclass">
+              <option value="Warrior" selected>Warrior</option>
+              <option value="Rogue">Rogue (Basic)</option>
+              <option value="Mage" disabled>Mage (Not Impl.)</option>
             </select>
           </li>
           <li>

@@ -1,0 +1,298 @@
+/**
+ * Class definitions and base stats for all character classes
+ */
+const ClassesData = {
+    Warrior: {
+        name: 'Warrior',
+        resourceType: 'Rage',
+        resourceMax: 100,
+        armorTypes: ['Cloth', 'Leather', 'Mail', 'Plate'],
+        weaponTypes: ['Axe', 'Sword', 'Mace', 'Dagger', 'Fist Weapon', 'Polearm', 'Staff'],
+        baseStats: {
+            health: 20,
+            healthPerLevel: 10,
+            healthPerStamina: 10,
+            str: 120,
+            agi: 80,
+            sta: 110,
+            int: 20,
+            spi: 30,
+            strPerLevel: 3,
+            agiPerLevel: 2,
+            staPerLevel: 2.5,
+            intPerLevel: 1,
+            spiPerLevel: 1
+        },
+        statScaling: {
+            critPerAgi: 20,  // Agility needed per 1% crit
+            apPerStr: 2,
+            apPerAgi: 1
+        }
+    },
+    
+    Rogue: {
+        name: 'Rogue',
+        resourceType: 'Energy',
+        resourceMax: 100,
+        resourceRegen: 20, // per 2 seconds
+        armorTypes: ['Cloth', 'Leather'],
+        weaponTypes: ['Dagger', 'Sword', 'Mace', 'Fist Weapon', 'Bow', 'Crossbow', 'Gun'],
+        baseStats: {
+            health: 20,
+            healthPerLevel: 8,
+            healthPerStamina: 10,
+            str: 80,
+            agi: 120,
+            sta: 90,
+            int: 30,
+            spi: 40,
+            strPerLevel: 2,
+            agiPerLevel: 3,
+            staPerLevel: 2,
+            intPerLevel: 1,
+            spiPerLevel: 1
+        },
+        statScaling: {
+            critPerAgi: 29,  // Agility needed per 1% crit
+            apPerStr: 1,
+            apPerAgi: 1
+        },
+        comboPoints: {
+            max: 5,
+            buildersPerHit: 1
+        }
+    },
+    
+    Mage: {
+        name: 'Mage',
+        resourceType: 'Mana',
+        armorTypes: ['Cloth'],
+        weaponTypes: ['Staff', 'Wand', 'Dagger', 'Sword'],
+        baseStats: {
+            health: 20,
+            healthPerLevel: 7,
+            healthPerStamina: 10,
+            mana: 120,
+            manaPerLevel: 45,
+            manaPerInt: 15,
+            str: 30,
+            agi: 40,
+            sta: 70,
+            int: 120,
+            spi: 110,
+            strPerLevel: 1,
+            agiPerLevel: 1,
+            staPerLevel: 1.5,
+            intPerLevel: 3,
+            spiPerLevel: 2.5
+        },
+        statScaling: {
+            spellCritPerInt: 59.5,  // Int needed per 1% spell crit
+            manaRegenPerSpi: 0.125  // Spirit to MP5 conversion (base)
+        },
+        fiveSecondRule: true  // Mana regen stops for 5 seconds after casting
+    },
+    
+    Hunter: {
+        name: 'Hunter',
+        resourceType: 'Mana',
+        armorTypes: ['Cloth', 'Leather', 'Mail'],
+        weaponTypes: ['Axe', 'Sword', 'Dagger', 'Fist Weapon', 'Polearm', 'Staff', 'Bow', 'Crossbow', 'Gun'],
+        baseStats: {
+            health: 20,
+            healthPerLevel: 8,
+            healthPerStamina: 10,
+            mana: 100,
+            manaPerLevel: 40,
+            manaPerInt: 15,
+            str: 70,
+            agi: 130,
+            sta: 95,
+            int: 80,
+            spi: 80,
+            strPerLevel: 2,
+            agiPerLevel: 3,
+            staPerLevel: 2,
+            intPerLevel: 2,
+            spiPerLevel: 1.5
+        },
+        statScaling: {
+            critPerAgi: 53,
+            rangedApPerAgi: 2,
+            spellCritPerInt: 54
+        },
+        hasPet: true
+    },
+    
+    Warlock: {
+        name: 'Warlock',
+        resourceType: 'Mana',
+        armorTypes: ['Cloth'],
+        weaponTypes: ['Staff', 'Wand', 'Dagger', 'Sword'],
+        baseStats: {
+            health: 20,
+            healthPerLevel: 7.5,
+            healthPerStamina: 10,
+            mana: 110,
+            manaPerLevel: 42,
+            manaPerInt: 15,
+            str: 30,
+            agi: 40,
+            sta: 80,
+            int: 110,
+            spi: 120,
+            strPerLevel: 1,
+            agiPerLevel: 1,
+            staPerLevel: 1.5,
+            intPerLevel: 3,
+            spiPerLevel: 2.5
+        },
+        statScaling: {
+            spellCritPerInt: 60.6,
+            manaRegenPerSpi: 0.125
+        },
+        fiveSecondRule: true,
+        hasPet: true
+    },
+    
+    Priest: {
+        name: 'Priest',
+        resourceType: 'Mana',
+        armorTypes: ['Cloth'],
+        weaponTypes: ['Staff', 'Wand', 'Dagger', 'Mace'],
+        baseStats: {
+            health: 20,
+            healthPerLevel: 7,
+            healthPerStamina: 10,
+            mana: 120,
+            manaPerLevel: 45,
+            manaPerInt: 15,
+            str: 30,
+            agi: 40,
+            sta: 70,
+            int: 120,
+            spi: 130,
+            strPerLevel: 1,
+            agiPerLevel: 1,
+            staPerLevel: 1.5,
+            intPerLevel: 3,
+            spiPerLevel: 2.5
+        },
+        statScaling: {
+            spellCritPerInt: 59.5,
+            manaRegenPerSpi: 0.125
+        },
+        fiveSecondRule: true
+    },
+    
+    Paladin: {
+        name: 'Paladin',
+        resourceType: 'Mana',
+        armorTypes: ['Cloth', 'Leather', 'Mail', 'Plate'],
+        weaponTypes: ['Axe', 'Sword', 'Mace', 'Polearm'],
+        baseStats: {
+            health: 20,
+            healthPerLevel: 9,
+            healthPerStamina: 10,
+            mana: 80,
+            manaPerLevel: 35,
+            manaPerInt: 15,
+            str: 110,
+            agi: 70,
+            sta: 110,
+            int: 80,
+            spi: 90,
+            strPerLevel: 2.5,
+            agiPerLevel: 1.5,
+            staPerLevel: 2.5,
+            intPerLevel: 2,
+            spiPerLevel: 2
+        },
+        statScaling: {
+            critPerAgi: 20,
+            apPerStr: 2,
+            spellCritPerInt: 54,
+            manaRegenPerSpi: 0.125
+        },
+        fiveSecondRule: true
+    },
+    
+    Druid: {
+        name: 'Druid',
+        resourceType: 'Mana',
+        armorTypes: ['Cloth', 'Leather'],
+        weaponTypes: ['Staff', 'Dagger', 'Fist Weapon', 'Mace', 'Polearm'],
+        baseStats: {
+            health: 20,
+            healthPerLevel: 8,
+            healthPerStamina: 10,
+            mana: 100,
+            manaPerLevel: 40,
+            manaPerInt: 15,
+            str: 90,
+            agi: 80,
+            sta: 95,
+            int: 100,
+            spi: 110,
+            strPerLevel: 2,
+            agiPerLevel: 1.5,
+            staPerLevel: 2,
+            intPerLevel: 2.5,
+            spiPerLevel: 2.5
+        },
+        statScaling: {
+            critPerAgi: 20,  // Varies by form
+            apPerStr: 2,
+            spellCritPerInt: 60,
+            manaRegenPerSpi: 0.125
+        },
+        fiveSecondRule: true,
+        shapeshifting: true
+    },
+    
+    Shaman: {
+        name: 'Shaman',
+        resourceType: 'Mana',
+        armorTypes: ['Cloth', 'Leather', 'Mail'],
+        weaponTypes: ['Axe', 'Dagger', 'Fist Weapon', 'Mace', 'Staff'],
+        baseStats: {
+            health: 20,
+            healthPerLevel: 8,
+            healthPerStamina: 10,
+            mana: 100,
+            manaPerLevel: 40,
+            manaPerInt: 15,
+            str: 100,
+            agi: 80,
+            sta: 100,
+            int: 90,
+            spi: 110,
+            strPerLevel: 2.5,
+            agiPerLevel: 1.5,
+            staPerLevel: 2,
+            intPerLevel: 2.5,
+            spiPerLevel: 2.5
+        },
+        statScaling: {
+            critPerAgi: 20,
+            apPerStr: 2,
+            spellCritPerInt: 59.2,
+            manaRegenPerSpi: 0.125
+        },
+        fiveSecondRule: true
+    }
+};
+
+/**
+ * Get class data by name
+ */
+function getClassData(className) {
+    return ClassesData[className] || null;
+}
+
+/**
+ * Get all available class names
+ */
+function getAllClasses() {
+    return Object.keys(ClassesData);
+}
